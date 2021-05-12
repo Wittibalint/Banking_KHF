@@ -47,7 +47,7 @@ namespace Banking.Web
 
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult<int>> PutAccount(Int64 id, [FromBody] AccountWithCustomerId account)
+        public async Task<ActionResult<int>> PutAccountWithCustomer(Int64 id, [FromBody] AccountWithCustomerId account)
         {
             try
             {
@@ -55,6 +55,19 @@ namespace Banking.Web
                 return Ok(await serviceManager.ModifyAccount(account.account));
             }
             catch(Exception e)
+            {
+                return NotFound();
+            }
+        }
+        [HttpPut("account/{id}")]
+        public async Task<ActionResult<int>> PutAccount(Int64 id, [FromBody] Account account)
+        {
+            account.Customer = await serviceManager.GetCustomer(account.Customer.Id);
+            try
+            {
+                return Ok(await serviceManager.ModifyAccount(account));
+            }
+            catch (Exception e)
             {
                 return NotFound();
             }

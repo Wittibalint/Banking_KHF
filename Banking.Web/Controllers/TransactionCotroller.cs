@@ -37,6 +37,10 @@ namespace Banking.Web
         {
             try
             {
+                if(transaction.toDate == DateTime.MinValue)
+                {
+                    transaction.toDate = DateTime.Now;
+                }
                 return Ok(await serviceManager.GetTransactionByDate(transaction.fromDate, transaction.toDate, transaction.accountId));
             }
             catch

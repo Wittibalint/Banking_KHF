@@ -46,6 +46,7 @@ namespace Banking.services
             else if(transaction.Amount > transaction.AccountFrom.Amount){
                 throw new Exception("Not enough money");
             }
+            transaction.TransactionDate = DateTime.Now;
             return await repository.InsertTransaction(transaction);
         }
 

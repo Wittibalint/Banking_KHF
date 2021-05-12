@@ -32,7 +32,7 @@ namespace Banking.Web
             services.AddControllers().AddJsonOptions(o => {
                 o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
             });
-
+            services.AddOpenApiDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +53,8 @@ namespace Banking.Web
             {
                 endpoints.MapControllers();
             });
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Banking.data.Repository
         {
             try
             {
-                Account account = await BankingDbContext.Accounts.Select(a => a).Where(a => a.Id == id).FirstAsync();
+                Account account = await BankingDbContext.Accounts.Select(a => a).Where(a => a.Id == id).Include(c => c.Customer).FirstAsync();
                 return account;
             }
             catch (Exception e)
