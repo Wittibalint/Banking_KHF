@@ -65,10 +65,6 @@ namespace Banking.Web
             }
             catch(Exception e)
             {
-                if(e.Message == "Not enough money")
-                {
-                    return NotFound("Not enough money");
-                }
                 return NotFound();
             }
 
