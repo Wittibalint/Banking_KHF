@@ -148,7 +148,7 @@ namespace Banking.data.Repository
         }
         public async Task<Transaction> GetTransactionyId(int id)
         {
-            return await BankingDbContext.Transactions.Select(t => t).Where(t => t.Id == id).SingleAsync();
+            return await BankingDbContext.Transactions.Select(t => t).Where(t => t.Id == id).Include(a => a.AccountFrom).Include(at => at.AccountTo).SingleAsync();
         }
     }
 }

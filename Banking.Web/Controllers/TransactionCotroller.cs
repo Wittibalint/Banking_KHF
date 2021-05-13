@@ -21,11 +21,20 @@ namespace Banking.Web
             serviceManager = service;
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<ICollection<Transaction>>> GetTransactionById(int id)
+        public async Task<ActionResult<TransactionJson>> GetTransactionById(int id)
         {
             try
             {
-                return Ok(await serviceManager.GetTransactionById(id));
+                Transaction transaction = await serviceManager.GetTransactionById(id);
+                TransactionJson response = new TransactionJson()
+                {
+                    id = transaction.Id,
+                    accountFrom = transaction.AccountFrom.Id,
+                    accountTo = transaction.AccountTo.Id,
+                    amount = transaction.Amount,
+                    description = transaction.Description
+                };
+                return Ok(response);
             }
             catch
             {
@@ -63,7 +72,7 @@ namespace Banking.Web
 
                 return Ok(await serviceManager.CreateTransaction(newTransaction));
             }
-            catch(Exception e)
+            catch
             {
                 return NotFound();
             }

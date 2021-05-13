@@ -8,6 +8,7 @@ namespace Banking.Service
 {
     public class TransactionJson
     {
+        public int id { get; set; }
         public Int64 accountFrom { get; set; }
         public Int64 accountTo { get; set; }
         public int amount { get; set; }
