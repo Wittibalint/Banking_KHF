@@ -33,15 +33,15 @@ namespace Banking.Web
             }
         }
         [HttpGet("list")]
-        public async Task<ActionResult<ICollection<Transaction>>> GetTransactionsByDateAsync([FromBody] TransactionListJson transaction)
+        public async Task<ActionResult<ICollection<Transaction>>> GetTransactionsByDateAsync(Int64 accountId, DateTime fromDate, DateTime toDate)
         {
             try
             {
-                if(transaction.toDate == DateTime.MinValue)
+                if(toDate == DateTime.MinValue)
                 {
-                    transaction.toDate = DateTime.Now;
+                    toDate = DateTime.Now;
                 }
-                return Ok(await serviceManager.GetTransactionByDate(transaction.fromDate, transaction.toDate, transaction.accountId));
+                return Ok(await serviceManager.GetTransactionByDate(fromDate, toDate, accountId));
             }
             catch
             {
