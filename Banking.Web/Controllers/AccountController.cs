@@ -8,9 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Banking.Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Banking.Web
 {
+    [Authorize]
     [Route("/account")]
     [ApiController]
     public class AccountController : ControllerBase

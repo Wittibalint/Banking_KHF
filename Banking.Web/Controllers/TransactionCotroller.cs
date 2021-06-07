@@ -2,6 +2,7 @@
 using Banking.Service;
 using Banking.services;
 using Banking.Web.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Banking.Web
 {
+    [Authorize]
     [Route("/transaction")]
     [ApiController]
     public class TransactionController : ControllerBase
@@ -42,15 +44,15 @@ namespace Banking.Web
             }
         }
         [HttpGet("list")]
-        public async Task<ActionResult<ICollection<Transaction>>> GetTransactionsByDateAsync(Int64 accountId, DateTime fromDate, DateTime toDate)
+        public async Task<ActionResult<ICollection<Transaction>>> GetTransactionsByDateAsync([FromBody] TransactionListJson values)
         {
             try
             {
-                if(toDate == DateTime.MinValue)
+                if(values.toDate == DateTime.MinValue)
                 {
-                    toDate = DateTime.Now;
+                    values.toDate = DateTime.Now;
                 }
-                return Ok(await serviceManager.GetTransactionByDate(fromDate, toDate, accountId));
+                return Ok(await serviceManager.GetTransactionByDate(values.fromDate, values.toDate, values.accountId));
             }
             catch
             {

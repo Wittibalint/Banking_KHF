@@ -1,6 +1,8 @@
 ﻿using Banking.data.Entitiy;
 using Banking.data.Repository;
 using Banking.services;
+using JWTAuthentication.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,7 @@ using System.Xml;
 
 namespace Banking.Web.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     [Route("/customer")]
     [ApiController]
     public class CustomerController : ControllerBase
