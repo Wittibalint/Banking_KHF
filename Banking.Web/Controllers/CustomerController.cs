@@ -1,6 +1,7 @@
 ﻿using Banking.data.Entitiy;
 using Banking.data.Repository;
 using Banking.services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Xml;
 namespace Banking.Web.Controllers
 {
     [Route("/customer")]
+    [Authorize]
     [ApiController]
     public class CustomerController : ControllerBase
     {

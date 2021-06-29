@@ -1,14 +1,13 @@
 ﻿using Banking.data.Entitiy;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Banking.data
 {
-    public class BankingDbContext : DbContext
+    public class BankingDbContext : IdentityDbContext<CustomUser>
     {
         public BankingDbContext(DbContextOptions<BankingDbContext> options) : base(options)
         {
-
         }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Account> Accounts { get; set; }
@@ -16,6 +15,7 @@ namespace Banking.data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Customer>(title =>
             {
                 title.Property(t => t.Id).ValueGeneratedOnAdd();//2000000

@@ -2,6 +2,7 @@
 using Banking.Service;
 using Banking.services;
 using Banking.Web.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace Banking.Web
 {
     [Route("/transaction")]
+    [Authorize]
     [ApiController]
     public class TransactionController : ControllerBase
     {
